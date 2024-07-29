@@ -1,0 +1,80 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Debug",
+			"command": "python run_debug.py",
+			"type": "shell",
+			"args": [],
+			"runOptions": {
+				"instanceLimit": 1
+			},
+			"icon": {
+				"id": "debug-all"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"presentation": {
+				"reveal": "always",
+				"echo": false,
+				"showReuseMessage": false,
+				"revealProblems": "onProblem",
+				"clear": true,
+			},
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			},
+		},
+		{
+			"label": "Debug Build",
+			"command": "python ./build-system/main.py debug",
+			"type": "shell",
+			"args": [],
+			"runOptions": {
+				"instanceLimit": 1
+			},
+			"icon": {
+				"id": "debug-alt"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"presentation": {
+				"reveal": "always",
+				"echo": false,
+				"showReuseMessage": false,
+				"revealProblems": "onProblem",
+				"clear": true,
+			},
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			},
+		},
+		{
+			"icon": {
+				"id": "tools"
+			},
+			"label": "Release Build",
+			"command": "python ./build-system/main.py release",
+			"type": "shell",
+			"args": [],
+			"problemMatcher": [
+				"$gcc"
+			],
+			"presentation": {
+				"reveal": "always",
+				"echo": false,
+				"showReuseMessage": false,
+				"revealProblems": "onProblem",
+				"clear": true,
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}

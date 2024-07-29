@@ -1,0 +1,76 @@
+{
+    "configurations": [
+		{
+			"name": "test compiler",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/cp2",
+			"args": [
+				"-MD",
+				"-Bbuild","-Ddocumentation",
+				"--msyntax=Intel",
+				"-Iinc","--fno-libc","-NOD",
+				"-S","-c",
+				"-o","build/main.o",
+				"src/main.c2"
+			],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}/../cpe2Example/",
+			"environment": [],
+			"externalConsole": false,
+			"osx": {
+				"MIMode": "lldb",
+			},
+			"linux": {
+				"MIMode": "gdb",
+			},
+			"setupCommands": [
+				{
+					"description": "Enable pretty-printing for gdb",
+					"text": "-enable-pretty-printing",
+					"ignoreFailures": true
+				},
+				{
+					"description": "Set Disassembly Flavor to Intel",
+					"text": "-gdb-set disassembly-flavor intel",
+					"ignoreFailures": true
+				},
+				{
+                    "description": "Skip system libraries",
+                    "text": "skip -gfi /usr/include/*",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Skip C++ standard library",
+                    "text": "skip -gfi /usr/lib*/libstdc++.so*",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Skip C standard library",
+                    "text": "skip -gfi /lib*/libc.so*",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Skip C++ standard library headers",
+                    "text": "skip -gfi /usr/include/c++/*",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Skip system headers",
+                    "text": "skip -gfi /usr/include/sys/*",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Skip C standard library headers",
+                    "text": "skip -gfi /usr/include/*",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Skip GCC-specific headers",
+                    "text": "skip -gfi /usr/lib/gcc/*",
+                    "ignoreFailures": true
+                }
+			]
+		},
+    ]
+}

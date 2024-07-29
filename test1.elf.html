@@ -1,0 +1,80 @@
+<!DOCTYPE html><html><head><style>@import url('https://dev-cats.github.io/code-snippets/JetBrainsMono.css');
+* {
+	font-family: 'Jetbrains Mono';
+}
+
+:root {
+	--hue: 200;
+	--bg-sat: 10%;
+	--bg-lit: 10%;
+
+	--txt-sat: 80%;
+	--txt-lit: 50%;
+
+	--opcode-hue: 350;
+	--prefix-hue: 300;
+	--operrand-hue-base: 100;
+	--operrand1-hue: calc(var(--operrand-hue-base) + 0);
+	--operrand2-hue: calc(var(--operrand-hue-base) + 50);
+	--operrand3-hue: calc(var(--operrand-hue-base) + 100);
+}
+
+* {
+	color: hsl(var(--hue),var(--txt-sat),var(--txt-lit));
+}
+
+body {
+	background: hsl(var(--hue),var(--bg-sat),var(--bg-lit));
+}
+
+.instruction {
+	background: hsl(var(--hue),var(--bg-sat),calc(var(--bg-lit) + 10%));
+	border-radius: 8px;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.HexDisplay {
+	color: inherit;
+}
+
+/*
+	. encoded
+*/
+.encoded {
+	font-size: 14px;
+}
+.encoded .byte {
+	padding-left: 5px;
+	color: inherit;
+}
+
+/*
+	. decoded
+*/
+.decoded {
+	font-size: 20px;
+}
+.decoded span {
+	padding-left: 5px;
+}
+
+/*
+	. encoded & decoded
+*/
+.opcode {
+	color: hsl(var(--opcode-hue),var(--txt-sat),var(--txt-lit));
+}
+.prefix {
+	color: hsl(var(--prefix-hue),var(--txt-sat),var(--txt-lit));
+}
+.operrand1 {
+	color: hsl(var(--operrand1-hue),var(--txt-sat),var(--txt-lit));
+}
+.operrand2 {
+	color: hsl(var(--operrand2-hue),var(--txt-sat),var(--txt-lit));
+}
+.operrand3 {
+	color: hsl(var(--operrand3-hue),var(--txt-sat),var(--txt-lit));
+}
+</style></head><body><div class='instruction'><div class='encoded'><span class='opcode'><span class='byte'>c8</span></span><span class='operrand1'><span class='byte'>10</span><span class='byte'>00</span></span><span class='operrand2'><span class='byte'>00</span></span></div><div class='decoded'><span class='opcode'>enter</span><span class='operrand1'><span class='HexDisplay'>0x10</span></span><span class='operrand2'><span class='HexDisplay'>0x0</span></span></div></div><div class='instruction'><div class='encoded'><span class='prefix'><span class='HexDisplay'>0x4c</span></span><span class='opcode'><span class='byte'>89</span></span><span class='operrand1'><span class='byte'>45</span><span class='byte'>08</span></span><span class='operrand2'></span></div><div class='decoded'><span class='prefix'>REX</span><span class='opcode'>mov</span><span class='operrand1'>[rbp+<span class='HexDisplay'>0x8</span>]</span><span class='operrand2'>r8</span></div></div><div class='instruction'><div class='encoded'><span class='opcode'><span class='byte'>e8</span></span><span class='operrand1'><span class='byte'>00</span><span class='byte'>00</span><span class='byte'>00</span><span class='byte'>00</span></span></div><div class='decoded'><span class='opcode'>call</span><span class='operrand1'>charP8_UTHS_u64</span></div></div></body></html>

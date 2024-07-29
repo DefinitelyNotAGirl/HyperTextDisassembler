@@ -1,0 +1,18 @@
+{
+	"opcode disas": {
+		"prefix": "opcode",
+		"body": [
+			"//+",
+			"//+ $3",
+			"//+",
+			"else if(opcode == amd64::opcode::$1) {",
+				"\tDisplay.Components.push_back(InstructionComponent(",
+					"\t\tInstructionComponentType::opcode,",
+					"\t\tEncodedByteRange(InstructionBuffer,offset,1),",
+					"\t\t\"$2\"",
+				"\t));",
+				"\t$0",
+			"}",
+		]
+	}
+}

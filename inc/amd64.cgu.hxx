@@ -374,24 +374,47 @@ namespace amd64
 	}
 
 	namespace decode {
+		Register RegisterCode(byte code,bool rex) {
+			return (Register)(
+				register_encode_cpl(3)
+				| register_encode_base(code)
+				| (rex != 0 ? register_encode_rex() : 0)
+			);
+		}
 		namespace modrm {
 			inline Register reg(byte modrm,byte rex) {
-				return (Register)(
-					register_encode_cpl(3)
-					| register_encode_base((modrm & 0b00111000)>>3)
-					| ((rex&1<<2) != 0 ? register_encode_rex() : 0)
-				);
+				return RegisterCode((modrm & 0b00111000)>>3,(rex&1<<2) != 0);
 			}
 			inline Register rm(byte modrm,byte rex) {
-				return (Register)(
-					register_encode_cpl(3)
-					| register_encode_base((modrm & 0b00000111)>>0)
-					| ((rex&1<<0) != 0 ? register_encode_rex() : 0)
-				);
+				return RegisterCode((modrm & 0b00111000)>>0,(rex&1<<0) != 0);
 			}
 			inline AddressingMode mod(byte modrm) {
 				return (AddressingMode)((modrm & 0b11000000)>>6);
 			}
+			inline byte digit(byte modrm) {
+				return (modrm & 0b00111000)>>3;
+			}
+		}
+		inline std::string condition(byte condition_code) {
+			switch(condition_code) {
+				case(0x0): return "o";
+				case(0x1): return "no";
+				case(0x2): return "c";
+				case(0x3): return "nc";
+				case(0x4): return "z";
+				case(0x5): return "nz";
+				case(0x6): return "be";
+				case(0x7): return "a";
+				case(0x8): return "s";
+				case(0x9): return "ns";
+				case(0xA): return "pe";
+				case(0xB): return "po";
+				case(0xC): return "l";
+				case(0xD): return "ge";
+				case(0xE): return "le";
+				case(0xF): return "g";
+			}
+			return "{invalid condition code}";
 		}
 	}
 
@@ -717,8 +740,7 @@ namespace amd64
 		namespace push{
 			constexpr byte imm16_32 = 0x68;
 			constexpr byte imm8 = 0x6A;
-			constexpr byte rm16_32 = 0xFF;
-			constexpr byte rm64_16 = 0xFF;
+			constexpr byte rm16_32_64 = 0xFF;
 		}
 		namespace imul{
 			constexpr byte r16_32_64__rm16_32_64__imm16_32 = 0x69;

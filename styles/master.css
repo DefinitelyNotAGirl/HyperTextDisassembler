@@ -11,8 +11,11 @@
 	--txt-sat: 80%;
 	--txt-lit: 50%;
 
+	--subsect-hue: 100;
+	--function-hue: 50;
 	--opcode-hue: 350;
 	--prefix-hue: 300;
+	--immediate-hue: 25;
 	--operrand-hue-base: 100;
 	--operrand1-hue: calc(var(--operrand-hue-base) + 0);
 	--operrand2-hue: calc(var(--operrand-hue-base) + 50);
@@ -27,33 +30,39 @@ body {
 	background: hsl(var(--hue),var(--bg-sat),var(--bg-lit));
 }
 
-.instruction {
-	background: hsl(var(--hue),var(--bg-sat),calc(var(--bg-lit) + 10%));
-	border-radius: 8px;
-	padding: 10px;
-	margin-bottom: 10px;
+.FunctionName {
+	color: hsl(var(--function-hue),var(--txt-sat),var(--txt-lit));
+}
+.SubSectionName {
+	color: hsl(var(--subsect-hue),var(--txt-sat),var(--txt-lit));
+}
+
+.failed {
+	color: red;
 }
 
 .HexDisplay {
-	color: inherit;
+	color: hsl(var(--immediate-hue),var(--txt-sat),var(--txt-lit));
 }
 
 /*
 	. encoded
 */
 .encoded {
-	font-size: 14px;
+	font-size: 16px;
 }
-.encoded .byte {
-	padding-left: 5px;
-	color: inherit;
+.encoded.byte {
+	padding-right: 5px;
 }
 
 /*
 	. decoded
 */
+.InstructionComponent {
+	padding-right: 15px;
+}
 .decoded {
-	font-size: 20px;
+	font-size: 16px;
 }
 .decoded span {
 	padding-left: 5px;

@@ -6,6 +6,8 @@ import util.fs
 
 import subprocess
 
+import platform
+
 def cpp(src: str, out: str, tcurrent: int, tmax: int) -> int:
 	ExitCode: int = 0
 	#+
@@ -14,6 +16,8 @@ def cpp(src: str, out: str, tcurrent: int, tmax: int) -> int:
 	print(" \033[34m\u25C9\033[0m",src,"(",tcurrent,"/",tmax,")")
 	if options.compiler_cxx == "g++":
 		ExitCode = os.system(options.compiler_cxx+" -o "+out+" "+src+" -MD -MF "+out+".d "+options.args_cxx+" &> ./build/.stdout")
+	elif options.compiler_cxx == "clang++" and platform.system() == "Windows":
+		ExitCode = os.system(options.compiler_cxx+" -o "+out.replace("/","\\")+" "+src.replace("/","\\")+" -MD -MF "+out.replace("/","\\")+".d "+options.args_cxx+" &> .\\build\\.stdout")
 	elif options.compiler_cxx == "clang++":
 		ExitCode = os.system(options.compiler_cxx+" -o "+out+" "+src+" -MD -MF "+out+".d "+options.args_cxx+" &> ./build/.stdout")
 	print("\033[1F",end='')
